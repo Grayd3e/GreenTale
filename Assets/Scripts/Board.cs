@@ -89,10 +89,6 @@ public class Board : MonoBehaviour
     private ScoreManager scoreManager;
     private GoalManager goalManager;
 
-    [Header("Interface Stuff")]
-    public GameObject reshufflePanel;
-    public Animator reshufflePanelAnimator;
-
     private void Awake()
     {
         if (PlayerPrefs.HasKey("Current Level"))
@@ -134,7 +130,7 @@ public class Board : MonoBehaviour
 
         while (IsDeadLocked()) // странная хуйня с дедлоками - может это поможет - while не помог - а всё заруинил
         {
-            //Debug.Log("Dead Locked!");
+            Debug.Log("Dead Locked!");
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
@@ -691,7 +687,7 @@ public class Board : MonoBehaviour
 
     private void DestroyMatchesAt(int column, int row)
     {
-        if (allDots[column, row].GetComponent<Dot>().isMached)
+        if (allDots[column, row].GetComponent<Dot>().isMached || allDots[column, row].GetComponent<Dot>().isFloorDamage)
         {
             if (breakableTiles[column, row] != null)
             {
@@ -715,23 +711,28 @@ public class Board : MonoBehaviour
 
             DamageConcrete(column, row);
 
-            if (goalManager != null)
+            allDots[column, row].GetComponent<Dot>().isFloorDamage = false;
+
+            if (allDots[column, row].GetComponent<Dot>().isMached)
             {
-                goalManager.CompareGoals(allDots[column, row].tag.ToString());
-                goalManager.UpdateGoals();
+                if (goalManager != null)
+                {
+                    goalManager.CompareGoals(allDots[column, row].tag.ToString());
+                    goalManager.UpdateGoals();
+                }
+
+                if (soundManager != null)
+                {
+                    soundManager.PlayRandomDestroyNoise();
+                }
+
+                GameObject particle = Instantiate(destroyEffect, allDots[column, row].transform.position, Quaternion.identity);
+
+                Destroy(particle, .5f);
+                Destroy(allDots[column, row]);
+                scoreManager.IncreaseScore(basePieceValue * streakValue);
+                allDots[column, row] = null;
             }
-
-            if (soundManager != null)
-            {
-                soundManager.PlayRandomDestroyNoise();
-            }
-
-            GameObject particle = Instantiate(destroyEffect, allDots[column, row].transform.position, Quaternion.identity);
-
-            Destroy(particle, .5f);
-            Destroy(allDots[column, row]);
-            scoreManager.IncreaseScore(basePieceValue * streakValue);
-            allDots[column, row] = null;
         }
     }
 
@@ -1004,14 +1005,7 @@ public class Board : MonoBehaviour
 
     private IEnumerator ShuffleBoard()
     {
-        reshufflePanel.SetActive(true);
-        reshufflePanelAnimator.SetBool("isShuffle", true);
-
-        yield return new WaitForSeconds(refillDelay * 2);
-
-        reshufflePanelAnimator.SetBool("isShuffle", false);
-        yield return new WaitForSeconds(refillDelay * 3);
-        reshufflePanel.SetActive(false);
+        yield return new WaitForSeconds(refillDelay);
 
         List<GameObject> newBoard = new List<GameObject>();
 
@@ -1019,7 +1013,7 @@ public class Board : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                if (allDots[i, j] != null && lockTiles[i, j] == null) 
+                if (allDots[i, j] != null && lockTiles[i, j] == null) //Нужно, чтобы он не перемешивал фишки под замком надеюсь сработает (Фроман)
                 {
                     newBoard.Add(allDots[i, j]);
                 }
@@ -1056,9 +1050,9 @@ public class Board : MonoBehaviour
                 }
             }
         }
-        if (IsDeadLocked()) 
+        if (IsDeadLocked()) //для починки дедлоков - while не помог - думаем дальше
         {
-            StartCoroutine(ShuffleBoard());  
+            StartCoroutine(ShuffleBoard());  //корутин всё починил - а почему - не знаю ._.
         }
     }
 }

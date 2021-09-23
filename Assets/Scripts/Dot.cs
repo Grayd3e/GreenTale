@@ -12,6 +12,7 @@ public class Dot : MonoBehaviour
     public int targetX;
     public int targetY;
     public bool isMached = false;
+    public bool isFloorDamage = false;
     public GameObject otherDot;
 
     private EndGameManager endGameManager;
@@ -32,6 +33,7 @@ public class Dot : MonoBehaviour
     public bool isColorBomb;
     public bool isColumnBomb;
     public bool isRowBomb;
+    public bool isBombNeedsToBeActivated = false;
 
     public GameObject rowArrow;
     public GameObject columnArrow;
@@ -137,8 +139,6 @@ public class Dot : MonoBehaviour
                 }
 
                 isMached = true;
-
-                //findMatches.FindAllMatches();
 
                 board.DestroyMatches();
             }
@@ -280,9 +280,12 @@ public class Dot : MonoBehaviour
         if (!isColumnBomb && !isColorBomb && !isAdjacentBomb)
         {
             isRowBomb = true;
+            isFloorDamage = true;
+            isBombNeedsToBeActivated = true;
             GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
             arrow.transform.parent = this.transform;
             this.GetComponent<SpriteRenderer>().sprite = nullSprite;
+
         }
     }
     public void MakeColumnBomb()
@@ -290,6 +293,8 @@ public class Dot : MonoBehaviour
         if (!isRowBomb && !isColorBomb && !isAdjacentBomb)
         {
             isColumnBomb = true;
+            isFloorDamage = true;
+            isBombNeedsToBeActivated = true;
             GameObject arrow = Instantiate(columnArrow, transform.position, Quaternion.identity);
             arrow.transform.parent = this.transform;
             this.GetComponent<SpriteRenderer>().sprite = nullSprite;
@@ -301,6 +306,8 @@ public class Dot : MonoBehaviour
         if (!isRowBomb && !isColumnBomb && !isAdjacentBomb)
         {
             isColorBomb = true;
+            isFloorDamage = true;
+            isBombNeedsToBeActivated = true;
             GameObject color = Instantiate(colorBomb, transform.position, Quaternion.identity);
             color.transform.parent = this.transform;
             this.gameObject.tag = "ColorBomb";
@@ -313,6 +320,8 @@ public class Dot : MonoBehaviour
         if (!isRowBomb && !isColumnBomb && !isColorBomb)
         {
             isAdjacentBomb = true;
+            isFloorDamage = true;
+            isBombNeedsToBeActivated = true;
             GameObject marker = Instantiate(adjacentMarker, transform.position, Quaternion.identity);
             marker.transform.parent = this.transform;
             this.GetComponent<SpriteRenderer>().sprite = nullSprite;

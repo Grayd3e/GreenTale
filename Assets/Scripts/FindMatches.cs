@@ -23,20 +23,23 @@ public class FindMatches : MonoBehaviour
     {
         List<GameObject> currentDots = new List<GameObject>();
 
-        if (dot1.isRowBomb)
+        if (dot1.isRowBomb && dot1.isBombNeedsToBeActivated)
         {
+            dot1.isBombNeedsToBeActivated = false;
             currentMatches.Union(GetRowPieces(dot1.row));
             board.BombRow(dot1.row);
         }
 
-        if (dot2.isRowBomb)
+        if (dot2.isRowBomb && dot2.isBombNeedsToBeActivated)
         {
+            dot2.isBombNeedsToBeActivated = false;
             currentMatches.Union(GetRowPieces(dot2.row));
             board.BombRow(dot2.row);
         }
 
-        if (dot3.isRowBomb)
+        if (dot3.isRowBomb && dot3.isBombNeedsToBeActivated)
         {
+            dot3.isBombNeedsToBeActivated = false;
             currentMatches.Union(GetRowPieces(dot3.row));
             board.BombRow(dot3.row);
         }
@@ -48,20 +51,23 @@ public class FindMatches : MonoBehaviour
     {
         List<GameObject> currentDots = new List<GameObject>();
 
-        if (dot1.isColumnBomb)
+        if (dot1.isColumnBomb && dot1.isBombNeedsToBeActivated)
         {
+            dot1.isBombNeedsToBeActivated = false;
             currentMatches.Union(GetColumnPieces(dot1.column));
             board.BombColumn(dot1.column);
         }
 
-        if (dot2.isColumnBomb)
+        if (dot2.isColumnBomb && dot2.isBombNeedsToBeActivated)
         {
+            dot2.isBombNeedsToBeActivated = false;
             currentMatches.Union(GetColumnPieces(dot2.column));
             board.BombColumn(dot2.column);
         }
 
-        if (dot3.isColumnBomb)
+        if (dot3.isColumnBomb && dot3.isBombNeedsToBeActivated)
         {
+            dot3.isBombNeedsToBeActivated = false;
             currentMatches.Union(GetColumnPieces(dot3.column));
             board.BombColumn(dot3.column);
         }
@@ -73,18 +79,21 @@ public class FindMatches : MonoBehaviour
     {
         List<GameObject> currentDots = new List<GameObject>();
 
-        if (dot1.isAdjacentBomb)
+        if (dot1.isAdjacentBomb && dot1.isBombNeedsToBeActivated)
         {
+            dot1.isBombNeedsToBeActivated = false;
             currentMatches.Union(GetAjacentPieces(dot1.column, dot1.row));
         }
 
-        if (dot2.isAdjacentBomb)
+        if (dot2.isAdjacentBomb && dot2.isBombNeedsToBeActivated)
         {
+            dot2.isBombNeedsToBeActivated = false;
             currentMatches.Union(GetAjacentPieces(dot2.column, dot2.row));
         }
 
-        if (dot3.isAdjacentBomb)
+        if (dot3.isAdjacentBomb && dot3.isBombNeedsToBeActivated)
         {
+            dot3.isBombNeedsToBeActivated = false;
             currentMatches.Union(GetAjacentPieces(dot3.column, dot3.row));
         }
 
@@ -197,8 +206,28 @@ public class FindMatches : MonoBehaviour
                 {
                     if (board.allDots[i, j] != null)
                     {
+                        Dot dot = board.allDots[i, j].GetComponent<Dot>();
+
+                        if (dot.isRowBomb && dot.isBombNeedsToBeActivated)
+                        {
+                            dot.isBombNeedsToBeActivated = false;
+                            dots.Union(GetRowPieces(i)).ToList();
+                        }
+
+                        if (dot.isColumnBomb && dot.isBombNeedsToBeActivated)
+                        {
+                            dot.isBombNeedsToBeActivated = false;
+                            dots.Union(GetColumnPieces(j)).ToList();
+                        }
+
+                        if (dot.isAdjacentBomb && dot.isBombNeedsToBeActivated)
+                        {
+                            dot.isBombNeedsToBeActivated = false;
+                            dots.Union(GetAjacentPieces(i, j)).ToList();
+                        }
+
                         dots.Add(board.allDots[i, j]);
-                        board.allDots[i, j].GetComponent<Dot>().isMached = true;
+                        dot.isMached = true;
                     }
                 }
             }
@@ -206,22 +235,29 @@ public class FindMatches : MonoBehaviour
         return dots;
     }
 
-    public List<GameObject> GetColumnPieces(int colunmn)
+    public List<GameObject> GetColumnPieces(int column)
     {
         List<GameObject> dots = new List<GameObject>();
 
         for (int i = 0; i < board.height; i++)
         {
-            if (board.allDots[colunmn, i] != null)
+            if (board.allDots[column, i] != null)
             {
-                Dot dot = board.allDots[colunmn, i].GetComponent<Dot>();
+                Dot dot = board.allDots[column, i].GetComponent<Dot>();
 
-                if (dot.isRowBomb)
+                if (dot.isRowBomb && dot.isBombNeedsToBeActivated)
                 {
-                    dots.Union(GetColumnPieces(i)).ToList();
+                    dot.isBombNeedsToBeActivated = false;
+                    dots.Union(GetRowPieces(i)).ToList();
                 }
 
-                dots.Add(board.allDots[colunmn, i]);
+                if (dot.isAdjacentBomb && dot.isBombNeedsToBeActivated)
+                {
+                    dot.isBombNeedsToBeActivated = false;
+                    dots.Union(GetAjacentPieces(column, i)).ToList();
+                }
+
+                dots.Add(board.allDots[column, i]);
                 dot.isMached = true;
             }
         }
@@ -237,9 +273,16 @@ public class FindMatches : MonoBehaviour
             {
                 Dot dot = board.allDots[i, row].GetComponent<Dot>();
 
-                if (dot.isColumnBomb)
+                if (dot.isColumnBomb && dot.isBombNeedsToBeActivated)
                 {
+                    dot.isBombNeedsToBeActivated = false;
                     dots.Union(GetColumnPieces(i)).ToList();
+                }
+
+                if (dot.isAdjacentBomb && dot.isBombNeedsToBeActivated)
+                {
+                    dot.isBombNeedsToBeActivated = false;
+                    dots.Union(GetAjacentPieces(i, row)).ToList();
                 }
 
                 dots.Add(board.allDots[i, row]);
@@ -247,45 +290,5 @@ public class FindMatches : MonoBehaviour
             }
         }
         return dots;
-    }
-
-    public void CheckBombs(MatchType matchType)
-    {
-        if (board.currentDot != null)
-        {
-            if (board.currentDot.isMached && board.currentDot.tag == matchType.color)
-            {
-                board.currentDot.isMached = false;
-
-                if ((board.currentDot.swipeAngle > -45 && board.currentDot.swipeAngle <= 45)
-                    || (board.currentDot.swipeAngle < -135 && board.currentDot.swipeAngle >= 135))
-                {
-                    board.currentDot.MakeRowBomb();
-                }
-                else
-                {
-                    board.currentDot.MakeColumnBomb();
-                }
-            }
-            else if (board.currentDot.otherDot != null)
-            {
-                Dot otherDot = board.currentDot.otherDot.GetComponent<Dot>();
-
-                if (otherDot.isMached && otherDot.tag == matchType.color)
-                {
-                    otherDot.isMached = false;
-
-                    if ((board.currentDot.swipeAngle > -45 && board.currentDot.swipeAngle <= 45)
-                    || (board.currentDot.swipeAngle < -135 && board.currentDot.swipeAngle >= 135))
-                    {
-                        otherDot.MakeRowBomb();
-                    }
-                    else
-                    {
-                        otherDot.MakeColumnBomb();
-                    }
-                }
-            }
-        }
     }
 }

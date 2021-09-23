@@ -37,14 +37,15 @@ public class RealTimeCounter : MonoBehaviour
         TimeSpan timeNow = DateTime.Now.TimeOfDay;
         TimeSpan timeLeft = timeNow - gameData.saveData.timeOld;
 
+        Debug.Log("Time old " + gameData.saveData.timeOld);
         Debug.Log("Time past " + timeLeft);
         
-        adSpinTimer = gameData.saveData.adsSpinTimer - (float)(timeLeft.Seconds);
+        adSpinTimer = gameData.saveData.adsSpinTimer - (float)(timeLeft.TotalSeconds);
 
         if (gameData.saveData.isFreeSpinTimerActive)
         {
             isFreeTimerActive = true;
-            freeSpinTimer = gameData.saveData.freeSpinTimer - (float)(timeLeft.Seconds);
+            freeSpinTimer = gameData.saveData.freeSpinTimer - (float)(timeLeft.TotalSeconds);
         }
         else
         {            
