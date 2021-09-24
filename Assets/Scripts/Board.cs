@@ -89,6 +89,10 @@ public class Board : MonoBehaviour
     private ScoreManager scoreManager;
     private GoalManager goalManager;
 
+    [Header("Interface Stuff")]
+    public GameObject reshufflePanel;
+    public Animator reshufflePanelAnimator;
+
     private void Awake()
     {
         if (PlayerPrefs.HasKey("Current Level"))
@@ -1005,7 +1009,14 @@ public class Board : MonoBehaviour
 
     private IEnumerator ShuffleBoard()
     {
-        yield return new WaitForSeconds(refillDelay);
+        reshufflePanel.SetActive(true);
+        reshufflePanelAnimator.SetBool("isShuffle", true);
+
+        yield return new WaitForSeconds(refillDelay * 2);
+
+        reshufflePanelAnimator.SetBool("isShuffle", false);
+        yield return new WaitForSeconds(refillDelay * 3);
+        reshufflePanel.SetActive(false);
 
         List<GameObject> newBoard = new List<GameObject>();
 

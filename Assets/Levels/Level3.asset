@@ -85,17 +85,17 @@ MonoBehaviour:
   - {fileID: 2401161822489518905, guid: 3245efa013ec6a041b39a4f03db0c257, type: 3}
   - {fileID: 9107443932812846493, guid: 2afa2ba30c5e04e44b8dbcb4a1112810, type: 3}
   - {fileID: 7429344525052600734, guid: bad1a2a6445f6554aa4138612aa46035, type: 3}
-  scoreGoals: c4090000ac0d000088130000
+  scoreGoals: 20030000e803000046050000
   requirments:
     gameType: 0
     counterValue: 60
   levelGoals:
   - numberNeeded: 12
-    numberCollected: 0
+    numberCollected: 12
     goalSprite: {fileID: 21300000, guid: 016ed1b846b867749bf13e94ab7afc59, type: 3}
     matchValue: 2
   - numberNeeded: 12
-    numberCollected: 0
+    numberCollected: 18
     goalSprite: {fileID: 21300000, guid: a284c8b65604ea442af8e258a35b02ca, type: 3}
     matchValue: 4
   screenScaleing: 2
