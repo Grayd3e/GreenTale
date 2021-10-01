@@ -73,15 +73,17 @@ public class GoalManager : MonoBehaviour
         {
             if(levelGoals[i].matchValue != DotTags.Blank)
             {
-                GameObject goal = Instantiate(goalPrafab, goalIntroParent.transform.position, Quaternion.identity);
+                GameObject goal = Instantiate(goalPrafab); //, goalIntroParent.transform.position, Quaternion.identity
                 goal.transform.SetParent(goalIntroParent.transform);
+                goal.transform.localScale = new Vector3(1,1,1);
 
                 GoalPanel panel = goal.GetComponent<GoalPanel>();
                 panel.goalSprite = levelGoals[i].goalSprite;                
                 panel.goalString = "0 / " + levelGoals[i].numberNeeded;
 
-                GameObject gameGoal = Instantiate(goalPrafab, goalGameParent.transform.position, Quaternion.identity);
+                GameObject gameGoal = Instantiate(goalPrafab); //, goalGameParent.transform.position, Quaternion.identity
                 gameGoal.transform.SetParent(goalGameParent.transform);
+                gameGoal.transform.localScale = new Vector3(1, 1, 1);
 
                 panel = gameGoal.GetComponent<GoalPanel>();
                 currentGoals.Add(panel);
@@ -92,6 +94,7 @@ public class GoalManager : MonoBehaviour
             {
                 GameObject goal = Instantiate(goalBlankPrafab, goalIntroParent.transform.position, Quaternion.identity);
                 goal.transform.SetParent(goalIntroParent.transform);
+                goal.transform.localScale = new Vector3(1, 1, 1);
 
                 GoalPanel panel = goal.GetComponent<GoalPanel>();
                 panel.goalSprite = levelGoals[i].goalSprite;
@@ -99,6 +102,7 @@ public class GoalManager : MonoBehaviour
 
                 GameObject gameGoal = Instantiate(goalBlankPrafab, goalGameParent.transform.position, Quaternion.identity);
                 gameGoal.transform.SetParent(goalGameParent.transform);
+                gameGoal.transform.localScale = new Vector3(1, 1, 1);
 
                 panel = gameGoal.GetComponent<GoalPanel>();
                 currentGoals.Add(panel);
@@ -114,8 +118,6 @@ public class GoalManager : MonoBehaviour
 
         for (int  i = 0; i < levelGoals.Length; i++)
         {
-            
-
             if (levelGoals[i].matchValue == DotTags.Blank)
             {
                 currentGoals[i].goalText.text = ""; // 
@@ -143,9 +145,9 @@ public class GoalManager : MonoBehaviour
         if(goalsCompleted >= levelGoals.Length)
         {
 
-            if (endGame != null) //&& board.currentState == GameState.move
+            if (endGame != null) 
             {
-                endGame.WinGame(); //пытался добавить то, чтобы игра одидала конкц хода перед тем, как показать, что ты выйграл. Не получилось
+                endGame.WinGame(); 
             }
         }
     }
