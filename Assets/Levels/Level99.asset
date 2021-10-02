@@ -77,19 +77,19 @@ MonoBehaviour:
     tileKind: 0
   - x: 2
     y: 2
-    tileKind: 3
+    tileKind: 0
   - x: 2
     y: 3
-    tileKind: 2
+    tileKind: 0
   - x: 2
     y: 4
-    tileKind: 2
+    tileKind: 0
   - x: 2
     y: 5
-    tileKind: 2
+    tileKind: 0
   - x: 2
     y: 6
-    tileKind: 3
+    tileKind: 0
   - x: 2
     y: 7
     tileKind: 0
@@ -104,19 +104,19 @@ MonoBehaviour:
     tileKind: 0
   - x: 3
     y: 2
-    tileKind: 2
+    tileKind: 0
   - x: 3
     y: 3
     tileKind: 3
   - x: 3
     y: 4
-    tileKind: 2
+    tileKind: 3
   - x: 3
     y: 5
     tileKind: 3
   - x: 3
     y: 6
-    tileKind: 2
+    tileKind: 0
   - x: 3
     y: 7
     tileKind: 0
@@ -131,19 +131,19 @@ MonoBehaviour:
     tileKind: 0
   - x: 4
     y: 2
-    tileKind: 2
+    tileKind: 0
   - x: 4
     y: 3
-    tileKind: 2
+    tileKind: 3
   - x: 4
     y: 4
     tileKind: 3
   - x: 4
     y: 5
-    tileKind: 2
+    tileKind: 3
   - x: 4
     y: 6
-    tileKind: 2
+    tileKind: 0
   - x: 4
     y: 7
     tileKind: 0
@@ -158,19 +158,19 @@ MonoBehaviour:
     tileKind: 0
   - x: 5
     y: 2
-    tileKind: 2
+    tileKind: 0
   - x: 5
     y: 3
     tileKind: 3
   - x: 5
     y: 4
-    tileKind: 2
+    tileKind: 3
   - x: 5
     y: 5
     tileKind: 3
   - x: 5
     y: 6
-    tileKind: 2
+    tileKind: 0
   - x: 5
     y: 7
     tileKind: 0
@@ -185,19 +185,19 @@ MonoBehaviour:
     tileKind: 0
   - x: 6
     y: 2
-    tileKind: 3
+    tileKind: 0
   - x: 6
     y: 3
-    tileKind: 2
+    tileKind: 0
   - x: 6
     y: 4
-    tileKind: 2
+    tileKind: 0
   - x: 6
     y: 5
-    tileKind: 2
+    tileKind: 0
   - x: 6
     y: 6
-    tileKind: 3
+    tileKind: 0
   - x: 6
     y: 7
     tileKind: 0
@@ -272,7 +272,7 @@ MonoBehaviour:
     gameType: 0
     counterValue: 60
   levelGoals:
-  - numberNeeded: 44
+  - numberNeeded: 60
     numberCollected: 0
     goalSprite: {fileID: 21300000, guid: 4c4e5f3053e932c468f529117475b065, type: 3}
     matchValue: 8
