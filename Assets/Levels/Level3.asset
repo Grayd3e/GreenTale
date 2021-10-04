@@ -38,4 +38,4 @@ MonoBehaviour:
     numberCollected: 0
     goalSprite: {fileID: 0}
     matchValue: 10
-  screenScaleing: 4
+  screenScaleing: 2

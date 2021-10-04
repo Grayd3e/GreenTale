@@ -24,7 +24,7 @@ public class ConfirmPanel : MonoBehaviour
     private GameData gameData;
 
 
-    private void Start()
+    private void Awake()
     {
         gameData = FindObjectOfType<GameData>();        
 
@@ -63,7 +63,7 @@ public class ConfirmPanel : MonoBehaviour
     {
         levelText.text = ("Level " + (level + 1).ToString());        
 
-        if(gameData.saveData.highScores[level] >= 0)
+        if(gameData.saveData.highScores[level] >= 0 )
         {
             highScoreText.text = (gameData.saveData.highScores[level].ToString());
         }

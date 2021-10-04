@@ -12,7 +12,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
 
     void Start()
     {        
-        Advertisement.Initialize("4278969");
+        Advertisement.Initialize("4390037");
         Advertisement.AddListener(this);
 
         ShowBanner();
