@@ -38,14 +38,22 @@ public class RealTimeCounter : MonoBehaviour
         TimeSpan timeLeft = timeNow - gameData.saveData.timeOld;
 
         Debug.Log("Time old " + gameData.saveData.timeOld);
-        Debug.Log("Time past " + timeLeft);
+        Debug.Log("Time past " + timeLeft);        
         
-        adSpinTimer = gameData.saveData.adsSpinTimer - (float)(timeLeft.TotalSeconds);
 
         if (gameData.saveData.isFreeSpinTimerActive)
         {
             isFreeTimerActive = true;
-            freeSpinTimer = gameData.saveData.freeSpinTimer - (float)(timeLeft.TotalSeconds);
+
+            if ((float)(timeLeft.TotalSeconds) >= gameData.saveData.freeSpinTimer)
+            {
+                ResetFreeTimer();
+            }
+            else 
+            {
+                freeSpinTimer = gameData.saveData.freeSpinTimer - (float)(timeLeft.TotalSeconds);
+            }
+            
         }
         else
         {            
@@ -55,7 +63,15 @@ public class RealTimeCounter : MonoBehaviour
         if (gameData.saveData.isAdsSpinTimerActive)
         {
             isAdTimerActive = true;
-            adSpinTimer = gameData.saveData.adsSpinTimer - (float)(timeLeft.Seconds);
+
+            if ((float)(timeLeft.TotalSeconds) >= gameData.saveData.adsSpinTimer)
+            {
+                ResetAdTimer();
+            }
+            else
+            {
+                adSpinTimer = gameData.saveData.adsSpinTimer - (float)(timeLeft.TotalSeconds);
+            }            
         }
         else
         {
