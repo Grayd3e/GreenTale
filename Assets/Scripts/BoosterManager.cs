@@ -27,16 +27,15 @@ public class BoosterManager : MonoBehaviour
         board = FindObjectOfType<Board>();
         gameData = FindObjectOfType<GameData>();
 
-        boosterButtonColorBomb.text = gameData.saveData.busterValue[3].ToString();
-        boosterButtonGloves.text = gameData.saveData.busterValue[1].ToString(); ;
-        boosterButtonWateringCan.text = gameData.saveData.busterValue[2].ToString(); ;
-        boosterButtonShowel.text = gameData.saveData.busterValue[0].ToString(); ;
+        UpdateBusterValue();
     }    
 
     public void BoosterClick()
     {
         isBoosterPressed = true;
-        board.currentState = GameState.booster;        
+        board.currentState = GameState.booster;
+
+        UpdateBusterValue();
     }
 
     public void Update()
@@ -47,54 +46,74 @@ public class BoosterManager : MonoBehaviour
             busterAnimatorGloves.SetBool("isActive", false);
             busterAnimatorWateringCan.SetBool("isActive", false);
             busterAnimatorShowel.SetBool("isActive", false);
-        }
+        }        
     }
 
     public void DeleteSingleButtonPress()
     {
         busterAnimatorShowel.SetBool("isActive", true);
 
-        if (board.currentState == GameState.move)
+        if(gameData.saveData.busterValue[0] > 0)
         {
-            boosterType = BoosterType.DeleteSingle;
-            gameData.saveData.busterValue[0]--;
-            BoosterClick();            
-        }
+            if (board.currentState == GameState.move)
+            {
+                boosterType = BoosterType.DeleteSingle;
+                gameData.saveData.busterValue[0]--;
+                BoosterClick();
+            }
+        }        
     }
 
     public void DeleteRowButtonPress()
     {
         busterAnimatorWateringCan.SetBool("isActive", true);
 
-        if (board.currentState == GameState.move)
+        if(gameData.saveData.busterValue[2] > 0)
         {
-            boosterType = BoosterType.DeleteRow;
-            gameData.saveData.busterValue[2]--;
-            BoosterClick();            
-        }
+            if (board.currentState == GameState.move)
+            {
+                boosterType = BoosterType.DeleteRow;
+                gameData.saveData.busterValue[2]--;
+                BoosterClick();
+            }
+        }        
     }
 
     public void DeleteColumnButtonPress()
     {
         busterAnimatorGloves.SetBool("isActive", true);
 
-        if (board.currentState == GameState.move)
+        if (gameData.saveData.busterValue[1] > 0)
         {
-            boosterType = BoosterType.DeleteColumn;
-            gameData.saveData.busterValue[1]--;
-            BoosterClick();            
-        }
+            if (board.currentState == GameState.move)
+            {
+                boosterType = BoosterType.DeleteColumn;
+                gameData.saveData.busterValue[1]--;
+                BoosterClick();
+            }
+        }        
     }
 
     public void TransformColorBombButtonPress()
     {
         busterAnimatorColorBomb.SetBool("isActive", true);
 
-        if (board.currentState == GameState.move)
+        if (gameData.saveData.busterValue[3] > 0) 
         {
-            boosterType = BoosterType.TransformColorBomb;
-            gameData.saveData.busterValue[3]--;
-            BoosterClick();            
-        }
+            if (board.currentState == GameState.move)
+            {
+                boosterType = BoosterType.TransformColorBomb;
+                gameData.saveData.busterValue[3]--;
+                BoosterClick();
+            }
+        }        
+    }
+
+    public void UpdateBusterValue()
+    {
+        boosterButtonColorBomb.text = gameData.saveData.busterValue[3].ToString();
+        boosterButtonGloves.text = gameData.saveData.busterValue[1].ToString(); ;
+        boosterButtonWateringCan.text = gameData.saveData.busterValue[2].ToString(); ;
+        boosterButtonShowel.text = gameData.saveData.busterValue[0].ToString(); ;
     }
 }

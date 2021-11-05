@@ -101,6 +101,7 @@ public class GameData : MonoBehaviour
         FileStream file = File.Open(Application.persistentDataPath + "/player.dat", FileMode.Create);
         SaveData data = new SaveData();
         data = saveData;
+        data.playerHealth += 500;
         formatter.Serialize(file, data);
         file.Close();        
     }

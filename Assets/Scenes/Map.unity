@@ -39011,7 +39011,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -23.661987, y: 493.1156}
+  m_AnchoredPosition: {x: -23.661957, y: 493.1156}
   m_SizeDelta: {x: -300.50955, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &921045639654714651
@@ -39216,7 +39216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -8.900009, y: 0}
+  m_AnchoredPosition: {x: -8.900055, y: 0}
   m_SizeDelta: {x: -190.79037, y: -790.0673}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &921045640026703909
@@ -39332,7 +39332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.599976, y: -538.0155}
+  m_AnchoredPosition: {x: -12.599945, y: -538.0155}
   m_SizeDelta: {x: -278.4388, y: 83.28439}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &921045640353954067
@@ -39551,83 +39551,82 @@ MonoBehaviour:
 
     <b>GREEN TALE</b>
 
-    
 
-    
 
-    
+
+
+
 
     <b>REPAIRED MOON TEAM</b>
 
-    
+
 
     <b>GAME
     DESIGN</b>
 
-    
+
 
     Alexey Bukharkov
 
-    
+
 
     <b>PROGRAMMING</b>
 
-    
 
-    Alexey
-    Bukharkov
 
-    Denis Nedelko
+    Alexey Bukharkov
 
-    
+    Denis
+    Nedelko
+
+
 
     <b>ART</b>
 
-    
+
 
     Kirill Kochanov
 
-    Alexander
-    Danilov
+    Alexander Danilov
 
-    
 
-    <b>UI ELEMENTS</b>
+
+    <b>UI
+    ELEMENTS</b>
 
     pzUH
 
     https://opengameart.org/content/free-game-gui
 
-    
+
 
     <b>SOUND
     DESIGN</b>
 
-    
+
 
     Vasily Khmyrov
 
-    
+
 
     <b>MUSIC</b>
 
-    
 
-    Nikolay
-    Kotenko
 
-    
+    Nikolay Kotenko
 
-    <b>QA TEST</b>
 
-    
+
+    <b>QA
+    TEST</b>
+
+
 
     Vlad Sinenko
 
     Vasily Khmyrov
 
-    Kirill
-    Kochanov'
+    Kirill Kochanov'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4b4c6033ad14a7f498a04440e26a3c2b, type: 2}
   m_sharedMaterial: {fileID: -2325242357816620202, guid: 4b4c6033ad14a7f498a04440e26a3c2b,
